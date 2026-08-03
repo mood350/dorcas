@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 import Reveal from "./Reveal";
+import { asset } from "@/lib/assets";
 import { SOUVENIRS } from "@/app/data";
 
 function PlayIcon({ className = "" }: { className?: string }) {
@@ -69,8 +70,8 @@ function Lightbox({
         <video
           ref={videoRef}
           key={souvenir.src}
-          src={souvenir.src}
-          poster={souvenir.poster}
+          src={asset(souvenir.src)}
+          poster={asset(souvenir.poster)}
           controls
           playsInline
           preload="metadata"
@@ -165,7 +166,9 @@ export default function VideoGallery() {
               >
                 <span className="relative block aspect-[9/16] w-full">
                   <Image
-                    src={souvenir.poster}
+                    // `unoptimized` court-circuite le loader : c'est à nous
+                    // d'ajouter le basePath.
+                    src={asset(souvenir.poster)}
                     alt={souvenir.caption}
                     fill
                     sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"

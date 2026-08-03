@@ -11,6 +11,20 @@ npm run build   # build de production
 npm start       # servir le build
 ```
 
+## Hébergement (GitHub Pages)
+
+Le site est en export statique (`output: "export"`), publié automatiquement par
+`.github/workflows/deploy.yml` à chaque push sur `main`.
+
+👉 **https://mood350.github.io/dorcas/**
+
+Activation, une seule fois : *Settings → Pages → Build and deployment → Source :
+**GitHub Actions***.
+
+Le workflow construit avec `NEXT_PUBLIC_BASE_PATH=/dorcas`, car Pages sert le site
+depuis un sous-dossier. En local la variable est vide et le site reste à la racine.
+Si le dépôt est un jour renommé, il faut mettre cette valeur à jour dans le workflow.
+
 ## Tout personnaliser
 
 Un seul fichier : **`app/data.ts`**
